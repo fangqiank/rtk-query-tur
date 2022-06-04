@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const todosApi = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://jsonplaceholder.typicode.com',
 })
 
 export const getTodos = async () => {
