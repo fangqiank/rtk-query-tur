@@ -1160,33 +1160,15 @@
     },
     {
       "userId": 1,
-      "title": "New todo!",
-      "completed": false,
-      "id": 201
-    },
-    {
-      "userId": 1,
-      "title": "Learn stuff",
-      "completed": false,
-      "id": 202
-    },
-    {
-      "userId": 1,
       "title": "Hey!",
       "completed": false,
       "id": 203
     },
     {
       "userId": 1,
-      "title": "a new todo",
-      "completed": true,
-      "id": 204
-    },
-    {
-      "userId": 1,
-      "title": "second new to do",
+      "title": "a new test",
       "completed": false,
-      "id": 205
+      "id": 204
     }
   ]
 }

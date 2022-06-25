@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const todosApi = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'http://localhost:3001',
+  // baseURL: 'https://jsonplaceholder.typicode.com',
 })
 
 export const getTodos = async () => {
@@ -18,5 +19,6 @@ export const updateTodo = async (todo) => {
 }
 
 export const deleteTodo = async ({ id }) => {
-  return await todosApi.delete(`/todos/${id}`, id)
+  if (window.confirm('Are you sure you want to delete this todo?'))
+    return await todosApi.delete(`/todos/${id}`, id)
 }

@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import {todosApi ,getTodos, addTodo, updateTodo, deleteTodo} from '../api/todosApi'
+import {getTodos, addTodo} from '../api/todosApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
+import TodoItem  from './TodoItem'
 
 export const TodoList = () => {
 	const [newTodo, setNewTodo] = useState('')
@@ -17,18 +18,6 @@ export const TodoList = () => {
 	})
 
 	const addTodoMutation = useMutation(addTodo, {
-		onSuccess: () => {
-			queryClient.invalidateQueries('todos')
-		}
-	})
-
-	const updateTodoMutation = useMutation(updateTodo, {
-		onSuccess: () => {
-			queryClient.invalidateQueries('todos')
-		}
-	})
-
-	const deleteTodoMutation = useMutation(deleteTodo, {
 		onSuccess: () => {
 			queryClient.invalidateQueries('todos')
 		}
@@ -69,30 +58,7 @@ export const TodoList = () => {
 			{ isLoading && <p>Loading...</p>}
 			{ isError && <p>Error: {error.message}</p>}
 			{!isLoading && !isError && todos.map(todo => (
-				<article key={todo.id}>
-					<div className='todo'>
-						<input type="checkbox"
-							checked={todo.completed}
-							id={todo.id}
-							onChange={() => {
-								return updateTodoMutation.mutate({
-									...todo,
-									completed: !todo.completed
-								})
-							}}
-						/>
-						<label htmlFor={todo.id}>{todo.title}</label>
-					</div>	
-
-					<button 
-						className='trash'
-						onClick={() => {
-							return deleteTodoMutation.mutate({id: todo.id})
-						}}
-					>
-						<FontAwesomeIcon icon={faTrash} />
-					</button> 
-				</article>
+				<TodoItem todo={todo} key={todo.id}/>
 			))}	
 		</main>
 	)			
